@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-width=1.0">
+  <title>CrowdPulse-AI | Control Room</title>
+  
+  <meta name="description" content="AI-Powered Smart Stadium Control Room">
+  
+  <!-- Font Setup: Google Fonts (Inter & Outfit) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Material Symbols for Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <!-- Vanilla CSS Styles -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <span class="material-symbols-outlined icon-large">sensors</span>
+      <h1>CrowdPulse-AI</h1>
+    </div>
+    <nav class="nav-menu" id="main-nav">
+      <a href="#" data-target="view-overview" class="nav-item active"><span class="material-symbols-outlined">dashboard</span> Overview</a>
+      <a href="#" data-target="view-heatmaps" class="nav-item"><span class="material-symbols-outlined">map</span> Heatmaps</a>
+      <a href="#" data-target="view-gates" class="nav-item"><span class="material-symbols-outlined">door_open</span> Gates & Flow</a>
+      <a href="#" data-target="view-food" class="nav-item"><span class="material-symbols-outlined">fastfood</span> Food Queues</a>
+      <a href="#" data-target="view-alerts" class="nav-item"><span class="material-symbols-outlined">campaign</span> Alerts</a>
+      <a href="#" data-target="view-ai" class="nav-item"><span class="material-symbols-outlined">analytics</span> AI Predictions</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+    
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="header-titles">
+        <h2 id="page-title">Overview</h2>
+        <p class="subtitle">Wankhede Stadium • Match Day</p>
+      </div>
+      <div class="header-actions">
+        <div class="status-indicator">
+          <span class="pulse-dot"></span> System Online
+        </div>
+        <button class="btn-primary" id="btn-trigger-alert">
+          <span class="material-symbols-outlined">emergency</span>
+          Trigger Alert
+        </button>
+      </div>
+    </header>
+
+    <!-- View Container -->
+    <div class="views-container">
+      
+      <!-- 1. OVERVIEW VIEW -->
+      <div id="view-overview" class="view-section active">
+        <div class="dashboard-grid">
+          
+          <section class="card heatmap-card" id="heatmap-section-mini" data-navigate="view-heatmaps">
+            <div class="card-header">
+              <h3>Venue Heatmap (Real-Time)</h3>
+            </div>
+            <div class="heatmap-visual" id="heatmap-visual-mini">
+              <div class="stadium-zone" id="zone-north" style="top: 10%; left: 30%; width: 40%; height: 20%;">North</div>
+              <div class="stadium-zone" id="zone-south" style="bottom: 10%; left: 30%; width: 40%; height: 20%;">South</div>
+              <div class="stadium-zone" id="zone-east" style="top: 30%; right: 10%; width: 20%; height: 40%;">East</div>
+              <div class="stadium-zone" id="zone-west" style="top: 30%; left: 10%; width: 20%; height: 40%;">West</div>
+              <div class="stadium-pitch">Pitch</div>
+            </div>
+          </section>
+
+          <section class="card stat-card" id="stat-attendance">
+            <div class="card-header">
+              <h3>Total Attendance</h3>
+              <span class="material-symbols-outlined">groups</span>
+            </div>
+            <div class="stat-value" id="val-attendance">42,501</div>
+            <div class="stat-trend positive">
+              <span class="material-symbols-outlined">trending_up</span> +1.2% in last 10m
+            </div>
+          </section>
+
+          <section class="card gate-card" id="gate-status-mini" data-navigate="view-gates">
+            <div class="card-header">
+              <h3>Gate Flow Status</h3>
+              <span class="material-symbols-outlined">door_all</span>
+            </div>
+            <div class="gate-list" id="overview-gate-list"></div>
+          </section>
+
+          <section class="card queue-card" id="queue-status-mini" data-navigate="view-food">
+            <div class="card-header">
+              <h3>Food Queues</h3>
+              <span class="material-symbols-outlined">restaurant</span>
+            </div>
+            <div class="queue-list" id="overview-queue-list"></div>
+          </section>
+
+          <section class="card alert-card" id="alert-log-mini" data-navigate="view-alerts">
+            <div class="card-header">
+              <h3>Recent Alerts</h3>
+              <span class="material-symbols-outlined">notifications_active</span>
+            </div>
+            <div class="alert-list" id="overview-alert-list"></div>
+          </section>
+
+        </div>
+      </div>
+
+      <!-- 2. HEATMAPS VIEW -->
+      <div id="view-heatmaps" class="view-section">
+        <div class="full-card">
+          <div class="card-header">
+            <h3>Detailed AI Crowd Analysis Map</h3>
+            <div class="filter-pills">
+              <span class="pill active">All Zones</span>
+              <span class="pill">Concourse</span>
+              <span class="pill">Stands</span>
+            </div>
+          </div>
+          <div class="heatmap-visual large-map">
+            <!-- Stadium Zones -->
+            <div class="stadium-zone" id="zone-north-lg" style="top: 15%; left: 25%; width: 50%; height: 20%;">North Stand (Level 1 & 2)</div>
+            <div class="stadium-zone" id="zone-south-lg" style="bottom: 15%; left: 25%; width: 50%; height: 20%;">South Pavilion</div>
+            <div class="stadium-zone" id="zone-east-lg" style="top: 30%; right: 5%; width: 15%; height: 40%;">East Stand</div>
+            <div class="stadium-zone" id="zone-west-lg" style="top: 30%; left: 5%; width: 15%; height: 40%;">West Stand</div>
+            <div class="stadium-pitch">Pitch</div>
+            
+            <!-- Heat hotspots -->
+            <div class="heat-point bubble-red" style="top: 25%; left: 35%;"></div>
+            <div class="heat-point bubble-orange" style="bottom: 15%; right: 40%;"></div>
+
+            <!-- Exit Gates with Lineable Rectangles (Queue Indicators) -->
+            <div class="exit-gate" id="visual-gate-1" style="top: 5%; left: 45%;">
+               <span class="gate-label">Gate 1</span>
+               <div class="queue-bar-container"><div class="queue-fill" id="gate-fill-0"></div></div>
+            </div>
+            <div class="exit-gate" id="visual-gate-2" style="bottom: 5%; right: 45%;">
+               <span class="gate-label">Gate 2</span>
+               <div class="queue-bar-container"><div class="queue-fill" id="gate-fill-1"></div></div>
+            </div>
+            <div class="exit-gate" id="visual-gate-3" style="top: 45%; left: 1%;">
+               <span class="gate-label">Gate 3</span>
+               <div class="queue-bar-container"><div class="queue-fill" id="gate-fill-2"></div></div>
+            </div>
+            <div class="exit-gate" id="visual-gate-4" style="top: 45%; right: 1%;">
+               <span class="gate-label">Gate 4</span>
+               <div class="queue-bar-container"><div class="queue-fill" id="gate-fill-3"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. GATES & FLOW VIEW -->
+      <div id="view-gates" class="view-section">
+        <div class="grid-2col">
+          <div class="card">
+            <div class="card-header">
+              <h3>Gate Analytics</h3>
+            </div>
+            <div class="list-container" id="detailed-gate-list"></div>
+          </div>
+          <div class="card">
+             <div class="card-header">
+                <h3>Recommended Access Diversions</h3>
+             </div>
+             <div class="insight-panel">
+               <span class="material-symbols-outlined icon-large warn-icon">warning</span>
+               <h4>Congestion at Gate 2</h4>
+               <p>AI suggests opening Gate 5 and sending app notifications to re-route 15% of inbound traffic.</p>
+               <button class="btn-primary mt-4">Execute Re-routing</button>
+             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. FOOD QUEUES VIEW -->
+      <div id="view-food" class="view-section">
+        <div class="card">
+          <div class="card-header">
+            <h3>Concession Stands Live Metrics</h3>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Stand Name</th>
+                <th>Zone</th>
+                <th>Current Queue</th>
+                <th>Est. Wait Time</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="detailed-food-list">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 5. ALERTS VIEW -->
+      <div id="view-alerts" class="view-section">
+         <div class="card">
+            <div class="card-header">
+              <h3>Full System Alert Log</h3>
+              <button class="btn-outline">Export Log</button>
+            </div>
+            <div class="full-alert-list" id="detailed-alert-list">
+              <!-- Rendered via JS -->
+            </div>
+         </div>
+      </div>
+
+      <!-- 6. AI PREDICTIONS VIEW -->
+      <div id="view-ai" class="view-section">
+        <div class="grid-2col">
+          <div class="card">
+            <div class="card-header">
+              <h3>Exit Crowd Prediction (End of Match)</h3>
+            </div>
+            <div class="chart-dummy">
+              <div class="chart-bars">
+                <div class="bar" style="height: 20%;"><span class="label">80m</span></div>
+                <div class="bar" style="height: 40%;"><span class="label">85m</span></div>
+                <div class="bar" style="height: 100%;background:var(--accent-purple);"><span class="label">90m</span></div>
+                <div class="bar" style="height: 80%;"><span class="label">95m</span></div>
+                <div class="bar" style="height: 30%;"><span class="label">100m</span></div>
+              </div>
+            </div>
+            <p class="mt-4 text-sm text-secondary">Peak exit volume expected exactly at the 90-minute mark. Recommended to pre-open all emergency exits along the East corridor 10 minutes prior.</p>
+          </div>
+          
+          <div class="card">
+            <div class="card-header">
+              <h3>Crowd Sentiment & Safety AI</h3>
+            </div>
+            <div class="sentiment-metrics">
+               <div class="metric-circle good">
+                 <span class="value">92%</span>
+                 <span class="label">Safety Score</span>
+               </div>
+               <div class="metric-list">
+                 <p>🔥 No fire or smoke detected</p>
+                 <p>🏃‍♂️ No stampede patterns identified</p>
+                 <p>🔊 Decibel limit normal (85dB)</p>
+               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
