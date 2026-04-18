@@ -1,0 +1,20 @@
+CrowdPulse-AI Workflow Document
+
+PHASE 1: FRONTEND PROTOTYPE (COMPLETED)
+- Dashboard layout built with HTML/CSS.
+- Static navigation and responsive design implemented.
+- Dummy JSON data and setInterval loops created in main.js to simulate real-time updates.
+- Vite deployment setup successfully.
+
+PHASE 2: CLOUD & BACKEND INTEGRATION (NEXT STEP)
+- Set up Google Firebase Realtime Database.
+- Replace main.js setInterval simulations with live Firebase listeners (onValue).
+- Push initial dummy configuration into Firebase to serve real-time state to the clients.
+- Add user authentication (optional) for admin login.
+
+PHASE 3: ADVANCED GOOGLE TECH INTEGRATION
+- Embed Google Maps API for spatial heatmaps.
+- Simulate the Google Cloud Vision AI pipeline by creating a Google Cloud Function that updates the Firebase Database on a timer.
+- Trigger push notifications / live alerts from the backend.
+
+Let's begin Phase 2. Please review the implementation_plan.md artifact for details and feedback questions!

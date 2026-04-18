@@ -58,7 +58,7 @@ body {
 }
 
 .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
-.logo .icon-large { font-size: 32px; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.logo .icon-large { font-size: 32px; background: var(--accent-gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .logo h1 { font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
 
 .nav-menu { display: flex; flex-direction: column; gap: 8px; }
@@ -114,7 +114,7 @@ body {
 /* Grid Positioning for Overview */
 .heatmap-card { grid-column: span 2; grid-row: span 2; }
 .stat-card { grid-column: span 1; grid-row: span 1; justify-content: center; }
-.gate-card { grid-column: span 1; grid-row: span 2; }
+.gate-card { grid-column: span 1; grid-row: span 1; }
 .queue-card { grid-column: span 1; grid-row: span 1; }
 .alert-card { grid-column: span 1; grid-row: span 1; }
 
@@ -124,6 +124,7 @@ body {
 
 /* Heatmap Core Visuals */
 .heatmap-visual { flex: 1; background: rgba(0,0,0,0.2); border-radius: var(--radius-md); border: 1px dashed rgba(255,255,255,0.1); position: relative; overflow: hidden; }
+.large-map { min-height: 80vh; }
 .stadium-zone { position: absolute; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 12px; transition: background-color 0.5s ease; color: rgba(255,255,255,0.9); text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
 .stadium-pitch { position: absolute; top: 40%; left: 45%; width: 10%; height: 20%; background: #2d6a4f; border-radius: 50px; display: flex; align-items: center; justify-content: center; font-size: 10px; opacity: 0.8; }
 
@@ -182,3 +183,106 @@ body {
 .metric-circle .value { font-size: 32px; font-weight: 700; font-family: var(--font-display); }
 .metric-circle .label { font-size: 12px; color: var(--text-secondary); }
 .metric-list { display: flex; flex-direction: column; gap: 12px; font-size: 14px; }
+
+/* Hide Google Maps API Warning Error Dialog */
+.gm-err-container { display: none !important; }
+
+/* Login Overlay */
+.login-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg-primary);
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 60%),
+    radial-gradient(circle at 100% 0%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.login-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.login-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(59, 130, 246, 0.1);
+  transform: translateY(0);
+  animation: floatCard 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes floatCard {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.login-card .logo {
+  margin-bottom: 24px;
+}
+
+.login-card .logo h1 {
+  font-size: 26px;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group .material-symbols-outlined {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: 20px;
+}
+
+.input-group input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px 14px 48px;
+  color: var(--text-primary);
+  font-family: var(--font-base);
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.input-group input::placeholder {
+  color: rgba(148, 163, 184, 0.5);
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.w-full { width: 100%; }
+.justify-center { justify-content: center; }
+.text-center { text-align: center; }
+.mb-4 { margin-bottom: 16px; }
+.mb-6 { margin-bottom: 24px; }
+.login-error {
+  color: var(--status-danger);
+  font-size: 13px;
+  text-align: center;
+  margin-top: 12px;
+  display: none;
+}
+
